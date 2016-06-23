@@ -39,6 +39,51 @@
     <libdoc.output>JSpringBotHttpLibrary.html</libdoc.output>
   </properties>
 
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <distributionManagement>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:git:https://github.com/jspringbot/jspringbot-http.git</connection>
+    <url>scm:git:https://github.com/jspringbot/jspringbot-http.git</url>
+    <developerConnection>scm:git:https://github.com/jspringbot/jspringbot-http.git</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>owner</id>
+      <email>badong2210@yahoo.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>owner</id>
+      <email>alvinrdeleon@me.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
   <dependencies>
     <dependency>
       <groupId>org.jspringbot</groupId>
