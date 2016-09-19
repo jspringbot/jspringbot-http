@@ -33,6 +33,8 @@ import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicAuthCache;
@@ -48,6 +50,7 @@ import org.jspringbot.keyword.xml.XMLUtils;
 import org.jspringbot.syntax.HighlightRobotLogger;
 import org.xml.sax.SAXException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -69,36 +72,22 @@ public class HTTPHelper {
     public static final String USER_AGENT = "User-Agent";
 
     protected AbstractHttpClient client;
-
     protected HttpContext context;
-
     protected HttpRequest request;
-
     protected HttpResponse response;
-
     protected String responseString;
-
     protected StatusLine status;
-
     protected HttpEntity responseEntity;
-
     protected HttpHost targetHost;
-
     protected List<NameValuePair> params;
-
     protected List<NameValuePair> headers;
-
     protected URI uri;
-
     protected JSONHelper jsonHelper;
-
     protected XMLHelper xmlHelper;
-
     protected BasicCookieStore cookieStore;
-    
     protected boolean useUserAgent;
-    
     protected String userAgent;
+    protected MultipartEntityBuilder builder;
 
     public HTTPHelper(AbstractHttpClient client) {
         this.client = client;
@@ -187,6 +176,11 @@ public class HTTPHelper {
      */
     public void createPostRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, POST_METHOD);
+    }
+
+    public void createFileUploadRequest(String url) throws MalformedURLException, URISyntaxException {
+        createRequest(url, POST_METHOD);
+        builder = MultipartEntityBuilder.create();
     }
 
     /**
@@ -278,6 +272,17 @@ public class HTTPHelper {
         params.add(new BasicNameValuePair(name, value));
     }
 
+    public void addFileParameter(String name, File file) {
+        LOG.keywordAppender()
+                .appendArgument("Name", name)
+                .appendArgument("File", file.getAbsolutePath());
+        if(builder == null) {
+            throw new IllegalStateException("Not setup for file upload.");
+        }
+
+        builder.addPart(name, new FileBody(file));
+    }
+
     /**
      *
      * @param stringBody
@@ -350,7 +355,14 @@ public class HTTPHelper {
 
         if (CollectionUtils.isNotEmpty(params)) {
             if (request instanceof HttpPost) {
-                ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, ENCODING_UTF_8));
+                if(builder == null) {
+                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, ENCODING_UTF_8));
+                } else {
+                    for(NameValuePair nv : params) {
+                        builder.addTextBody(nv.getName(), nv.getValue());
+                    }
+                    ((HttpPost) request).setEntity(builder.build());
+                }
             } else {
                 String queryString = URLEncodedUtils.format(params, ENCODING_UTF_8);
 
