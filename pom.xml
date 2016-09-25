@@ -25,13 +25,10 @@
   <parent>
     <groupId>org.jspringbot</groupId>
     <artifactId>jspringbot-libraries</artifactId>
-    <version>1.4</version>
+    <version>1.5-SNAPSHOT</version>
   </parent>
 
   <artifactId>jspringbot-http</artifactId>
-  <version>1.5-SNAPSHOT</version>
-
-  <packaging>jar</packaging>
   <name>jspringbot-http</name>
 
   <properties>
@@ -88,12 +85,10 @@
     <dependency>
       <groupId>org.jspringbot</groupId>
       <artifactId>jspringbot-json</artifactId>
-      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>org.jspringbot</groupId>
       <artifactId>jspringbot-xml</artifactId>
-      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
@@ -106,31 +101,26 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpmime</artifactId>
-      <version>4.3.4</version>
     </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <optional>true</optional>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
-      <version>1.8.0-rc2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path-assert</artifactId>
-      <version>1.2.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
