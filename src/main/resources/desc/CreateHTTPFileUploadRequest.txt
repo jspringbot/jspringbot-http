@@ -1,11 +1,12 @@
-Adds an HTTP Request Parameter.
+Create HTTP POST Request to upload a file.
 
 Example:
-| New HTTP Session                  |        |          |
-| Create HTTP Request               | ${URL} |          |
-| Add HTTP Request Parameter        | param  | ${param} |
-| Invoke HTTP Request               |        |          |
-| Response Status Code Should Be OK |        |          |
+| New HTTP Session                  |        |         |
+| Create HTTP File Upload Request   | ${URL} |         |
+| Add HTTP Request File             | file   | ${file} |
+| Add HTTP Request Parameter        | param  | ${param |
+| Invoke HTTP Request               |        |         |
+| Response Status Code Should Be OK |        |         |
 
 | *** Keywords ***                  |                                              |                                               |
 | Response Status Code Should Be OK |                                              |                                               |
