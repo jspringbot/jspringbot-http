@@ -1,3 +1,11 @@
 Return the HTTP response status code.
 
+Example:
+| New HTTP Session        |                               |
+| Create HTTP Get Request | http://www.google.com         |
+| Invoke HTTP Request     |                               |
+| ${statusCode}=          | Get HTTP Response Status Code |
+| EL Should Be True       | $[var('statusCode') eq '200'] |
+
+
 Please see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html for more information on the different HTTP Status Code.

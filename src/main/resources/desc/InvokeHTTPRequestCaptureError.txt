@@ -1,0 +1,6 @@
+Invokes HTTP request and expect error.
+
+Example
+| New HTTP Session        |                                   |
+| Create HTTP Get Request | http://pagenotfound               |
+| ${error}=               | Invoke HTTP Request Capture Error |

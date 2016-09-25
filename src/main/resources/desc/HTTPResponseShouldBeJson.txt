@@ -1,1 +1,13 @@
 Fail if the value of the HTTP Response is not in JSON format.
+
+Example:
+| New HTTP Session                  |                                                                                     |
+| Create HTTP Get Request           | http://api.wunderground.com/api/78aa96563b9ec435/conditions/q/CA/San_Francisco.json |
+| Invoke HTTP Request               |                                                                                     |
+| Response Status Code Should Be OK | 200                                                                                 |
+| HTTP Response Should Be JSON      |                                                                                     |
+
+| *** Keywords ***                  |                                              |                                               |
+| Response Status Code Should Be OK |                                              |                                               |
+|                                   | [Documentation]                              | Verifies that the response status code is 200 |
+|                                   | HTTP Response Status Code Should Be Equal To | 200                                           |

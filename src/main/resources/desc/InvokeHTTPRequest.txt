@@ -1,1 +1,6 @@
 Invokes HTTP Request.
+
+Example:
+| New HTTP Session                             |                       |
+| Create HTTP Get Request                      | http://www.google.com |
+| Invoke HTTP Request                          |                       |

@@ -1,1 +1,11 @@
 Creates a new HTTP session.
+
+Example:
+| New HTTP Session                             |                       |
+| Create HTTP Get Request                      | http://www.google.com |
+| Invoke HTTP Request                          |                       |
+| HTTP Response Status Code Should Be Equal To | 200                   |
+| New HTTP Session                             |                       |
+| Create HTTP Get Request                      | http://www.yahoo.com  |
+| Invoke HTTP Request                          |                       |
+| HTTP Response Status Code Should Be Equal To | 200                   |
