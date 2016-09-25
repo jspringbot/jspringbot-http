@@ -61,6 +61,7 @@
     <connection>scm:git:https://github.com/jspringbot/jspringbot-http.git</connection>
     <url>scm:git:https://github.com/jspringbot/jspringbot-http.git</url>
     <developerConnection>scm:git:https://github.com/jspringbot/jspringbot-http.git</developerConnection>
+    <tag>jspringbot-http-1.5</tag>
   </scm>
 
   <developers>

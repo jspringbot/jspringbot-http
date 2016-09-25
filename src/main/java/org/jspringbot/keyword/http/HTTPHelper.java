@@ -148,32 +148,14 @@ public class HTTPHelper {
         reset();
     }
 
-    /**
-     * Create an Http Request
-     * @param url
-     * @throws java.net.MalformedURLException
-     * @throws java.net.URISyntaxException
-     */
     public void createRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, GET_METHOD);
     }
 
-    /**
-     * Create an Http Get Request
-     * @param url
-     * @throws java.net.MalformedURLException
-     * @throws java.net.URISyntaxException
-     */
     public void createGetRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, GET_METHOD);
     }
 
-    /**
-     * Create an Http Post Request
-     * @param url
-     * @throws java.net.MalformedURLException
-     * @throws java.net.URISyntaxException
-     */
     public void createPostRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, POST_METHOD);
     }
@@ -183,33 +165,14 @@ public class HTTPHelper {
         builder = MultipartEntityBuilder.create();
     }
 
-    /**
-     * Create an Http Put Request
-     * @param url
-     * @throws MalformedURLException
-     * @throws URISyntaxException
-     */
     public void createPutRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, PUT_METHOD);
     }
 
-    /**
-     * Create an Http Delete Reqest
-     * @param url
-     * @throws MalformedURLException
-     * @throws URISyntaxException
-     */
     public void createDeleteRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, DELETE_METHOD);
     }
 
-    /**
-     * Create an Http Request
-     * @param paramUrl
-     * @param method
-     * @throws java.net.MalformedURLException
-     * @throws java.net.URISyntaxException
-     */
     public void createRequest(String paramUrl, String method) throws MalformedURLException, URISyntaxException {
         uri = new URL(paramUrl).toURI();
         targetHost = new HttpHost(uri.getHost(), uri.getPort(), uri.getScheme());
@@ -246,11 +209,6 @@ public class HTTPHelper {
         reset();
     }
 
-    /**
-     * Add Http Request Header
-     * @param name
-     * @param value
-     */
     public void addRequestHeader(String name, String value) {
         LOG.keywordAppender()
                 .appendArgument("Name", name)
@@ -259,11 +217,6 @@ public class HTTPHelper {
         headers.add(new BasicNameValuePair(name, value));
     }
 
-    /**
-     * Add Http Request Parameter
-     * @param name
-     * @param value
-     */
     public void addRequestParameter(String name, String value) {
         LOG.keywordAppender()
                 .appendArgument("Name", name)
@@ -283,10 +236,6 @@ public class HTTPHelper {
         builder.addPart(name, new FileBody(file));
     }
 
-    /**
-     *
-     * @param stringBody
-     */
     public void setRequestBody(String stringBody) throws UnsupportedEncodingException {
         if(!HttpEntityEnclosingRequest.class.isInstance(request)) {
             throw new IllegalArgumentException("Does not support string entity.");
@@ -305,11 +254,6 @@ public class HTTPHelper {
         ((HttpEntityEnclosingRequest) request).setEntity(new StringEntity(stringBody, ENCODING_UTF_8));
     }
 
-    /**
-     * Set Basic Authentication
-     * @param username
-     * @param password
-     */
     public void setBasicAuthentication(String username, String password) {
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
 
@@ -343,9 +287,6 @@ public class HTTPHelper {
         }
     }
 
-    /**
-     * Invoke Request
-     */
     public void invokeRequest() throws IOException {
         String actualUri = uri.getPath();
 
@@ -449,10 +390,6 @@ public class HTTPHelper {
         return response.getStatusLine().getStatusCode();
     }
 
-    /**
-     * Response should be XML
-     * @throws IOException
-     */
     public void responseShouldBeXML () throws IOException {
         try {
             if(responseString == null) {
@@ -469,10 +406,6 @@ public class HTTPHelper {
         }
     }
 
-    /**
-     *
-     * @throws IOException
-     */
     public void responseShouldBeJson () throws IOException {
         if(responseString == null) {
             responseString = EntityUtils.toString(responseEntity);
@@ -486,10 +419,6 @@ public class HTTPHelper {
         }
     }
 
-    /**
-     * Response Status Code Should Be Equal To
-     * @param statusCode
-     */
     public void responseStatusCodeShouldBeEqualTo(int statusCode) {
         LOG.keywordAppender()
                 .appendArgument("Expected Status Code", statusCode)
@@ -500,11 +429,6 @@ public class HTTPHelper {
         }
     }
 
-    /**
-     * Response Should Contain
-     * @param value
-     * @throws java.io.IOException
-     */
     public void responseShouldContain(String value) throws IOException {
         LOG.keywordAppender().appendArgument("Text", value);
 
