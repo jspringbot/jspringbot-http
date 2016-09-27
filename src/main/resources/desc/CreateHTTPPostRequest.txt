@@ -1,1 +1,11 @@
 Creates an HTTP Post Request.
+
+Example:
+| New HTTP Session                             |               |                  |
+| Create HTTP POST Request                     | ${URL}        |                  |
+| Set HTTP Request Body                        | ${jsonString} |                  |
+| Add HTTP Request Header                      | Accept        | application/json |
+| Add HTTP Request Parameter                   | ${paramkey}   | ${paramvalue}    |
+| Invoke HTTP Request                          |               |                  |
+| HTTP Response Status Code Should Be Equal To | 200           |                  |
+| HTTP Response Should Be JSON                 |               |                  |

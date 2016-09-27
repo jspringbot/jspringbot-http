@@ -1,1 +1,31 @@
 Sets HTTP request body.
+
+
+Example: Create JSON String
+| Start JSON Object           |                    |            |
+| Start JSON Object           | bicycle            |            |
+| Add JSON Object String Item | model              | bmx        |
+| Add JSON Object String Item | color              | red        |
+| Add JSON Object String Item | price              | $[d:19.95] |
+| End JSON Object             |                    |            |
+| End JSON Object             |                    |            |
+| ${jsonString}=              | Create JSON String |            |
+
+jsonString:
+| {
+|   "bicycle": {
+|       "model": "bmx",
+|       "color": "red",
+|       "price": 19.95
+|   }
+| }
+
+Example:
+| New HTTP Session                             |               |                  |
+| Create HTTP POST Request                     | ${URL}        |                  |
+| Set HTTP Request Body                        | ${jsonString} |                  |
+| Add HTTP Request Header                      | Accept        | application/json |
+| Add HTTP Request Parameter                   | ${paramkey}   | ${paramvalue}    |
+| Invoke HTTP Request                          |               |                  |
+| HTTP Response Status Code Should Be Equal To | 200           |                  |
+| HTTP Response Should Be JSON                 |               |                  |
