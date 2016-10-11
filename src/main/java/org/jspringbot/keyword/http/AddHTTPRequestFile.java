@@ -19,6 +19,7 @@
 package org.jspringbot.keyword.http;
 
 import org.jspringbot.KeywordInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceEditor;
@@ -34,13 +35,14 @@ import java.io.IOException;
 )
 public class AddHTTPRequestFile extends AbstractHTTPKeyword {
 
+    @Autowired
+    private ApplicationContext context;
+
     @Override
     public Object execute(Object[] params) throws IOException {
         String value = String.valueOf(params[1]);
 
-        ResourceEditor resourceEditor = new ResourceEditor();
-        resourceEditor.setAsText(value);
-        Resource resource = (Resource) resourceEditor.getValue();
+        Resource resource = context.getResource(value);
         httpHelper.addFileParameter(String.valueOf(params[0]), resource.getFile());
 
         return null;
