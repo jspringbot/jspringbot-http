@@ -20,12 +20,22 @@ Configure the following to use jspringbot-http.
 
 2. Import spring-http in {{jspringbot-global.xml}}
 
+To add support for {{jspringbot-doc:http}}, add this in {{jspringbot-global.xml}}.
+
+| <import resource="classpath:spring/spring-http-only.xml"/>
+
+To add support for {{jspringbot-doc:xml}}, add this in {{jspringbot-global.xml}}.
+
+| <import resource="classpath:spring/spring-http-xml.xml"/>
+
+To add support for {{jspringbot-doc:json}}, add this in {{jspringbot-global.xml}}.
+
+| <import resource="classpath:spring/spring-http-json.xml"/>
+
+To add support for both {{jspringbot-doc:xml}} and {{jspringbot:-doc:json}}. add this in {{jspringbot-global.xml}}.
+
 | <import resource="classpath:spring/spring-http.xml"/>
 
-3. To add support for {{jspringbot-doc:xml}} and {{jspringbot-doc:json}}, add the following in {{jspringbot-global.xml}}.
-
-| <import resource="classpath:spring/spring-xml.xml"/>
-| <import resource="classpath:spring/spring-json.xml"/>
 
 4. A {{jspringbot.properties}} file should exist in src/test/resources. See the possible properties below.
 
