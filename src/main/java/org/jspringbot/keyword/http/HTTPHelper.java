@@ -43,11 +43,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.jspringbot.keyword.expression.ELUtils;
 import org.jspringbot.keyword.json.JSONHelper;
 import org.jspringbot.keyword.json.JSONUtils;
 import org.jspringbot.keyword.xml.XMLHelper;
 import org.jspringbot.keyword.xml.XMLUtils;
 import org.jspringbot.syntax.HighlightRobotLogger;
+import org.springframework.expression.common.ExpressionUtils;
 import org.xml.sax.SAXException;
 
 import java.io.File;
@@ -417,6 +419,21 @@ public class HTTPHelper {
             jsonHelper.setJsonString(responseString);
             consume();
         }
+    }
+
+    public String getResponseString() throws IOException {
+        if(responseString == null) {
+            responseString = EntityUtils.toString(responseEntity);
+            consume();
+        }
+
+        return responseString;
+    }
+
+    public String captureResponseRegex(String regex, int... groups) throws IOException {
+        getResponseString();
+
+        return ELUtils.regexCapture(responseString, regex, groups);
     }
 
     public void responseStatusCodeShouldBeEqualTo(int statusCode) {
