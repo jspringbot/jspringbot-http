@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.jspringbot</groupId>
     <artifactId>jspringbot-libraries</artifactId>
-    <version>1.5</version>
+    <version>1.6-SNAPSHOT</version>
   </parent>
 
   <artifactId>jspringbot-http</artifactId>
@@ -91,6 +91,7 @@
     <dependency>
       <groupId>org.jspringbot</groupId>
       <artifactId>jspringbot-xml</artifactId>
+      <version>1.6-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>

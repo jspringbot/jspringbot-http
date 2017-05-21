@@ -403,7 +403,7 @@ public class HTTPHelper {
                 xmlHelper.setXmlString(responseString);
                 consume();
             }
-        } catch (SAXException e) {
+        } catch (Exception e) {
             throw new IOException(e);
         }
     }
