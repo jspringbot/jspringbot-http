@@ -73,4 +73,12 @@ public class HTTPHelperTest {
         jsonHelper.jsonValueShouldBe("current_observation.display_location.city", "San Francisco");
         jsonHelper.jsonValueShouldBe("current_observation.display_location.state", "CA");
     }
+    @Test
+    public void testDeleteRequest() throws  Exception{
+        httpHelper.newSession();
+        httpHelper.createDeleteRequest("http://anyurl.com");
+        httpHelper.addRequestHeader("Content-Type", "application/json");
+        httpHelper.setRequestBody("{ \"hello\": \"world\" }");
+
+    }
 }
