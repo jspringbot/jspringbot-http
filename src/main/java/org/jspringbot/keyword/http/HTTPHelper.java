@@ -45,12 +45,8 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.jspringbot.keyword.expression.ELUtils;
 import org.jspringbot.keyword.json.JSONHelper;
-import org.jspringbot.keyword.json.JSONUtils;
 import org.jspringbot.keyword.xml.XMLHelper;
-import org.jspringbot.keyword.xml.XMLUtils;
 import org.jspringbot.syntax.HighlightRobotLogger;
-import org.springframework.expression.common.ExpressionUtils;
-import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
@@ -198,7 +194,7 @@ public class HTTPHelper {
         } else if (method.equalsIgnoreCase(PUT_METHOD)) {
             request = new HttpPut(uriPath);
         } else if (method.equalsIgnoreCase(DELETE_METHOD)) {
-            request = new HttpDelete(uriPath);
+            request = new HttpDeleteWithBody(uriPath);
         } else {
             throw new IllegalArgumentException(String.format("Unknown http method '%s' for url '%s'.", method, paramUrl));
         }
