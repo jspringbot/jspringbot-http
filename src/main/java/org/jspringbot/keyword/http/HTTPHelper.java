@@ -19,6 +19,7 @@
 package org.jspringbot.keyword.http;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
@@ -48,9 +49,7 @@ import org.jspringbot.keyword.json.JSONHelper;
 import org.jspringbot.keyword.xml.XMLHelper;
 import org.jspringbot.syntax.HighlightRobotLogger;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -386,6 +385,26 @@ public class HTTPHelper {
 
     public int getResponseStatusCode() {
         return response.getStatusLine().getStatusCode();
+    }
+
+    public void responseToFile (String fileString) throws IOException {
+        FileOutputStream out = null;
+
+        try {
+            File file = new File(fileString);
+
+            if(!file.getParentFile().isDirectory()) {
+                file.getParentFile().mkdirs();
+            }
+
+            out = new FileOutputStream(file);
+            IOUtils.copy(responseEntity.getContent(), out);
+            consume();
+        } catch (Exception e) {
+            throw new IOException(e);
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
     }
 
     public void responseShouldBeXML () throws IOException {
