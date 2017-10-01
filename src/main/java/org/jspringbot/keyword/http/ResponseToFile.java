@@ -26,6 +26,7 @@ import java.io.IOException;
 @Component
 @KeywordInfo(
         name = "Response To File",
+        parameters = {"file"},
         description = "classpath:desc/ResponseToFile.txt"
 )
 public class ResponseToFile extends AbstractHTTPKeyword {
