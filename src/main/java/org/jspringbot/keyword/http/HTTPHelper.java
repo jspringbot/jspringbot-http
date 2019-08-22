@@ -33,9 +33,11 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicAuthCache;
@@ -48,6 +50,9 @@ import org.jspringbot.keyword.expression.ELUtils;
 import org.jspringbot.keyword.json.JSONHelper;
 import org.jspringbot.keyword.xml.XMLHelper;
 import org.jspringbot.syntax.HighlightRobotLogger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -67,7 +72,8 @@ public class HTTPHelper {
     public static final String DELETE_METHOD = "DELETE";
     public static final String ENCODING_UTF_8 = "utf-8";
     public static final String USER_AGENT = "User-Agent";
-
+    @Autowired
+    private ApplicationContext ctx;
     protected AbstractHttpClient client;
     protected HttpContext context;
     protected HttpRequest request;
@@ -162,6 +168,11 @@ public class HTTPHelper {
         builder = MultipartEntityBuilder.create();
     }
 
+    public void createMultiPartRequest(String url) throws MalformedURLException, URISyntaxException {
+        createRequest(url, POST_METHOD);
+        builder = MultipartEntityBuilder.create();
+    }
+
     public void createPutRequest(String url) throws MalformedURLException, URISyntaxException {
         createRequest(url, PUT_METHOD);
     }
@@ -231,6 +242,30 @@ public class HTTPHelper {
         }
 
         builder.addPart(name, new FileBody(file));
+    }
+
+    public void addBinaryContentParameter(String name, String resourceString) throws IOException {
+        LOG.keywordAppender()
+                .appendArgument("Name", name)
+                .appendArgument("resourceString", resourceString);
+        if(builder == null) {
+            throw new IllegalStateException("Not setup for file upload.");
+        }
+
+        Resource resource =  ctx.getResource(resourceString);
+        builder.addPart(name, new InputStreamBody(resource.getInputStream(), ContentType.DEFAULT_BINARY));
+    }
+
+    public void addTextContentParameter(String name, String resourceString) throws IOException {
+        LOG.keywordAppender()
+                .appendArgument("Name", name)
+                .appendArgument("resourceString", resourceString);
+        if(builder == null) {
+            throw new IllegalStateException("Not setup for file upload.");
+        }
+
+        Resource resource =  ctx.getResource(resourceString);
+        builder.addPart(name, new InputStreamBody(resource.getInputStream(), ContentType.DEFAULT_TEXT));
     }
 
     public void setRequestBody(String stringBody) throws UnsupportedEncodingException {

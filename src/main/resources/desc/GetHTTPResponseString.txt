@@ -1,0 +1,7 @@
+Returns the HTTP response String
+
+Example:
+| New HTTP Session                            |                                                                                    |
+| Create HTTP Get Request                     | http://api.wunderground.com/api/78aa96563b9ec435/conditions/q/CA/San_Francisco.xml |
+| Invoke HTTP Request                         |                                                                                    |
+| ${responseString}                           | Get HTTP Response String   |

@@ -1,0 +1,9 @@
+Adds HTTP Binary Content Parameter.
+
+Example:
+| New HTTP Session                   |        |          |
+| Create HTTP MultiPart Request      | ${URL} |          |
+| AAdd HTTP Binary Content Parameter | file   | file:{filepath}/classpath:{filepath}/{url} |
+| Add HTTP Request Parameter         | param  | ${param} |
+| Invoke HTTP Request                |        |          |
+
