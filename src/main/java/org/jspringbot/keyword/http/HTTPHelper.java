@@ -139,6 +139,7 @@ public class HTTPHelper {
         responseString = null;
         responseEntity = null;
         response = null;
+        builder = null;
     }
 
     public void newSession() {
